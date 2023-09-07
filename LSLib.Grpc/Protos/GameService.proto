@@ -1,0 +1,43 @@
+﻿// Specify the syntax version for Protocol Buffers
+syntax = "proto3";
+
+// Set the C# namespace for the generated classes
+option csharp_namespace = "LSLib.Grpc";
+
+// Define the package name
+package gameservice;
+
+// Define the GameService service with its RPC methods
+service GameService {
+  // RPC method for unpacking game files
+  // Takes an UnpackRequest message and returns an UnpackReply message
+  rpc Unpack (UnpackRequest) returns (UnpackReply);
+
+  // RPC method for packing game files
+  // Takes a PackRequest message and returns a PackReply message
+  rpc Pack (PackRequest) returns (PackReply);
+}
+
+// Message format for the Unpack RPC method request
+message UnpackRequest {
+  string gameName = 1;  // Name of the game to unpack
+  string gamePath = 2;  // Path to the game files
+  string targetUnpackDirectory = 3;  // Target directory for unpacked files
+}
+
+// Message format for the Unpack RPC method reply
+message UnpackReply {
+  string status = 1;  // Status of the unpack operation
+}
+
+// Message format for the Pack RPC method request
+message PackRequest {
+  string gameName = 1;  // Name of the game to pack
+  string gamePath = 2;  // Path to the game files
+  string targetPackDirectory = 3;  // Target directory for packed files
+}
+
+// Message format for the Pack RPC method reply
+message PackReply {
+  string status = 1;  // Status of the pack operation
+}
